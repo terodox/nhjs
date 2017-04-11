@@ -1,0 +1,36 @@
+{
+  "name": "nhjs",
+  "version": "1.0.0",
+  "description": "An example lambda function to create thumbnails for S3",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terodox/nhjs.git"
+  },
+  "keywords": [
+    "aws",
+    "awslmabda",
+    "lambda",
+    "s3",
+    "deadletterqueue",
+    "sam",
+    "serverlessapplicationmodel",
+    "nodejs",
+    "cloudformation"
+  ],
+  "author": "Andy Desmarais <adesmarais@newforma.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/terodox/nhjs/issues"
+  },
+  "homepage": "https://github.com/terodox/nhjs#readme",
+  "dependencies": {
+    "aws-sdk": "^2.40.0",
+    "gm": "^1.23.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}

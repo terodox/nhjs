@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Thumb Nailer - Thumbnail generator
+Resources:
+#------------------------- LAMBDA FUNCTION ------------------------
+  GetInboxLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./deploy.zip
+      Handler: index.handler
+      Runtime: nodejs6.10
+      Timeout: 300
+      Role: !GetAtt LambdaRole.Arn
+      Environment:
+        Variables:
+          destinationBucket: !Ref DestinationBucket
+#---------------------------- IAM ROLES ---------------------------
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: logs
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:*
+            Resource: arn:aws:logs:*:*:*
+      - PolicyName: bucket download
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - s3:GetObject
+            Resource: !Ref OriginBucket
+      - PolicyName: bucket upload
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - s3:PutObject
+            Resource: !Ref DestinationBucket
+#---------------------------- S3 Buckets ---------------------------
+  OriginBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      AccessControl: BucketOwnerFullControl
+      BucketName: "AdesmaraisOriginBucket"
+      NotificationConfiguration:
+        LambdaConfigurations:
+          Event: "s3:ObjectCreated:*"
+          Function: !Ref TODO LAMBDA REF
+  DestinationBucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      AccessControl: BucketOwnerFullControl
+      BucketName: "AdesmaraisDestinationBucket"
