@@ -44,7 +44,7 @@ Resources:
           - Effect: Allow
             Action:
             - s3:GetObject
-            Resource: !Ref OriginBucket
+            Resource: !Join ['', [ "arn:aws:s3:::", !Ref OriginBucket, "/*" ]]
       - PolicyName: bucket upload
         PolicyDocument:
           Version: '2012-10-17'
@@ -52,7 +52,7 @@ Resources:
           - Effect: Allow
             Action:
             - s3:PutObject
-            Resource: !Ref DestinationBucket
+            Resource: !Join ['', [ "arn:aws:s3:::", !Ref OriginBucket, "/*" ]]
 #---------------------------- S3 Buckets ---------------------------
   OriginBucket:
     Type: "AWS::S3::Bucket"
@@ -62,7 +62,7 @@ Resources:
       NotificationConfiguration:
         LambdaConfigurations:
           Event: "s3:ObjectCreated:*"
-          Function: !Ref TODO LAMBDA REF
+          Function: !Ref GetInboxLambdaFunction
   DestinationBucket:
     Type: "AWS::S3::Bucket"
     Properties:

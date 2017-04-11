@@ -1,3 +1,6 @@
+#deployment zip
+deploy/*.zip
+
 # Logs
 logs
 *.log
