@@ -11,10 +11,10 @@ const s3Client = new AWS.S3({
 const destinationBucket = process.env.destinationBucket;
 
 exports.handler = function (event, context, callback) {
-    console.info("event:", event);
+    console.info("event:", JSON.stringify(event));
 
     try {
-        const {srcBucket, srcKey} = getS3InfoFromEvent(event);
+        const { srcBucket, srcKey } = getS3InfoFromEvent(event);
         console.info("Source Bucket:", srcBucket);
         console.info("Source Key:", srcKey);
         console.info("Destination Bucket:", destinationBucket);
