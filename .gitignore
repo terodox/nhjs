@@ -1,5 +1,6 @@
-#deployment zip
+#deployment objects
 deploy/*.zip
+deploy/cloudformation.yaml
 
 # Logs
 logs
