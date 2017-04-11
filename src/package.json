@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "An example lambda function to create thumbnails for S3",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "bash ../deploy/deploy.sh"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/terodox/nhjs.git"

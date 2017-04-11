@@ -48,10 +48,8 @@ Resources:
   OriginBucket:
     Type: "AWS::S3::Bucket"
     Properties:
-      AccessControl: BucketOwnerFullControl
-      BucketName: "adesmarais-origin-bucket"
+      BucketName: "adesmarais-nhjs-origin-bucket"
   DestinationBucket:
     Type: "AWS::S3::Bucket"
     Properties:
-      AccessControl: BucketOwnerFullControl
-      BucketName: "adesmarais-destination-bucket"
+      BucketName: "adesmarais-nhjs-destination-bucket"
