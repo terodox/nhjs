@@ -31,7 +31,7 @@ const event = {
                     "arn": "arn:aws:s3:::adesmarais-nhjs-origin-bucket"
                 },
                 "object": {
-                    "key": "Andy_headshotWebCrop8.JPG",
+                    "key": "ILoveLambda.jpg",
                     "size": 367660,
                     "eTag": "1d1fc457d3ae63a3fb2a90f65dc526c4",
                     "sequencer": "0058ECAA892DFCCBC8"
