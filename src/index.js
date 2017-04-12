@@ -26,14 +26,16 @@ exports.handler = function (event, context, callback) {
 
         const uploadOptions = {
             Bucket: destinationBucket,
-            Key: `images/${fileName}.jpg`,
+            Key: `${fileName}`,
             Body: null,
             ContentType: 'JPG'
         };
 
+        console.info("Downloading Image:", downloadOptions);
         s3Client.getObject(downloadOptions).promise()
             .then(getObjectResponse => {
                 console.info("Resizing Image");
+                console.info(JSON.stringify(getObjectResponse));
                 return resize(getObjectResponse.Body);
             })
             .then(data => {
@@ -45,8 +47,8 @@ exports.handler = function (event, context, callback) {
                 console.info("Operation completed successfully");
             })
             .catch(err => {
-                console.log(err);
-                callback(err);
+                console.error(err);
+                callback("Unknown Error Occurred");
             });
 
     } catch (err) {
