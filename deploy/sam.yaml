@@ -22,6 +22,21 @@ Resources:
       Policies:
         - AmazonS3FullAccess
         - AmazonSQSFullAccess
+  FailingLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./deploy.zip
+      Handler: badIndex.handler
+      Runtime: nodejs6.10
+      Timeout: 3
+    Events:
+      OriginBucketFileCreate:
+        Type: S3
+        Properties:
+          Bucket: !Ref OriginBucket
+          Events: s3:ObjectCreated:*
+    Policies:
+      - AmazonSQSFullAccess
 #---------------------------- S3 Buckets ---------------------------
   OriginBucket:
     Type: "AWS::S3::Bucket"
