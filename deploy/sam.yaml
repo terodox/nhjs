@@ -19,7 +19,9 @@ Resources:
           Properties:
             Bucket: !Ref OriginBucket
             Events: s3:ObjectCreated:*
-      Policies: AmazonS3FullAccess
+      Policies:
+        - AmazonS3FullAccess
+        - AmazonSQSFullAccess
 #---------------------------- S3 Buckets ---------------------------
   OriginBucket:
     Type: "AWS::S3::Bucket"
@@ -29,3 +31,6 @@ Resources:
     Type: "AWS::S3::Bucket"
     Properties:
       BucketName: "adesmarais-nhjs-destination-bucket"
+#----------------------------- SQS DLQ -----------------------------
+  ThumbNailerDeadLetterQueue:
+    Type: "AWS::SQS::Queue"

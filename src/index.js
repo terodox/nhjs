@@ -50,7 +50,6 @@ exports.handler = function (event, context, callback) {
                 console.error(err);
                 callback("Unknown Error Occurred");
             });
-
     } catch (err) {
         console.error(err);
         callback("Operation did not complete as expected");
